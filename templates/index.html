@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broll's AI ChatBot</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        /* Add some basic styles to adjust the appearance */
+        .bot-message {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .bot-message img {
+            width: 40px; /* Adjust size of the icon */
+            height: 40px;
+            margin-right: 10px; /* Space between the icon and text */
+        }
+
+        .message span {
+            background-color: #f1f1f1;
+            padding: 8px 15px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box">
+            <div class="chat-header">
+                <h1>Career Guidance ChatBot</h1>
+            </div>
+
+            <div id="chatbox" class="chat-content">
+                <div class="message bot-message">
+                    <img src="{{ url_for('static', filename='bot.jpg') }}" alt="Bot Icon">
+                    <span>Hi! I'm Your bot. How can I assist you today?</span>
+                </div>
+            </div>
+
+            <form id="chat-form">
+                <div class="input-group">
+                    <input id="text" type="text" name="msg" placeholder="Type a message..." required class="input-field" />
+                    <button type="submit" id="send" class="send-button">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("form").on("submit", function(event) {
+                event.preventDefault();
+
+                var rawText = $("#text").val();
+                var userHtml = '<div class="message user-message"><span>' + rawText + "</span></div>";
+                $("#text").val(""); // Clear the input field
+                $("#chatbox").append(userHtml); // Append user message to chat
+
+                // Scroll to the latest message
+                $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+
+                $.ajax({
+                    data: {
+                        msg: rawText,
+                    },
+                    type: "POST",
+                    url: "/get", // Replace with your bot API endpoint
+                }).done(function(data) {
+                    var botHtml = '<div class="message bot-message">';
+                    botHtml += '<img src="{{ url_for("static", filename="bot.jpg") }}" alt="Bot Icon">';
+                    botHtml += '<span>' + data + "</span></div>";
+                    $("#chatbox").append(botHtml); // Append bot's reply
+                    $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight); // Scroll to the latest message
+                });
+            });
+        });
+    </script>
+</body>
+</html>
