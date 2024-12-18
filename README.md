@@ -1,69 +1,39 @@
-# An-AI-Chatbot-in-Python-and-Flask
-An AI Chatbot using Python and Flask REST API 
+# Career Guidance ChatBot
+An AI Chatbot using Python and Flask 
 
-## Requirements (libraries)
-1. TensorFlow
-1. Flask
+## Project Description
+This project creates an intelligent chatbot using Flask, Keras, and Natural Language Processing (NLP) techniques. The chatbot classifies user input, predicts intents, and generates appropriate responses based on predefined intent patterns. The system includes a web interface where users can interact with the bot in real-time.
 
-## VsCode SetUp
-1. Clone the repository-> cd into the cloned repository folder
-2. Create a python virtual environment 
-```
-# macOS/Linux
-# You may need to run sudo apt-get install python3-venv first
-python3 -m venv .venv
+## Key Features:
+Intent Prediction: The chatbot classifies user input by predicting the intent using a trained machine learning model built with Keras.
+Personalized Responses: If the user mentions their name, the bot personalizes its responses.
+Natural Language Processing: The chatbot processes input text using tokenization, lemmatization, and a bag-of-words model to improve its understanding of the message.
+Model Training: The chatbot model is trained on labeled data consisting of patterns and intents, using deep learning techniques to predict the appropriate response.
+Web Interface: Users interact with the chatbot through a simple web form where they submit their queries.
 
-# Windows
-# You can also use py -3 -m venv .venv
-python -m venv .venv
-```
-When you create a new virtual environment, a prompt will be displayed to allow you to select it for the workspace.
+## Technologies Used:
+Flask: For building the backend of the web application.
+Keras (TensorFlow): For loading and training the deep learning model.
+nltk: For text preprocessing (tokenization, lemmatization).
+NumPy: For handling numerical data and array operations.
+Pickle & JSON: For storing and loading the chatbot's vocabulary, classes, and intents.
+SGD Optimizer: For training the model using the Stochastic Gradient Descent (SGD) algorithm.
+Workflow:
+Text Preprocessing: User input is tokenized and lemmatized to standardize words.
+Bag of Words: The input is converted into a bag-of-words vector that represents the presence of words from the predefined vocabulary.
+Intent Prediction: The trained model predicts the intent of the input message by comparing it to labeled patterns in the training data.
+Response Selection: The chatbot fetches a random response from the list of responses associated with the predicted intent.
+Personalization: If the user mentions their name, the bot inserts it into the response for a personalized touch.
 
-3. Activate the virtual environment
-```
-#linux
-source ./venv/bin/activate  # sh, bash, or zsh
+## Training the Model:
+The model is trained on a dataset of user patterns and corresponding intents from a JSON file. It uses a neural network with three layers: an input layer with 128 neurons, a hidden layer with 64 neurons, and an output layer with neurons equal to the number of intents.
+The model is compiled using the Stochastic Gradient Descent (SGD) optimizer with Nesterov accelerated gradients to improve accuracy during training. The model is trained for 200 epochs with a batch size of 5.
 
-#windows
-.\venv\Scripts\activate
-```
-4. Run ```pip install --upgrade tensorflow``` to install ```Tensorflow```
-5. Run ```pip install -U nltk``` to install ```nltk```
-6. Run ```pip install -U Flask``` to install ```flask```
-7. To expose your bot via Ngrok, run ```pip install flask-ngrok``` to install ```flask-ngrok``` Then you'll need to configure your ngrok credentials(login: email + password) Then uncomment this line ```run_with_ngrok(app) ``` and comment the last two lines ```if __name__ == "__main__": app.run() ``` Notice that ngrok is not used by default.
-8. To access your bot on localhost, go to ```http://127.0.0.1:5000/ ``` If you're on Ngrok your url will be ```some-text.ngrok.io```
+## Use Cases:
+Customer Support: Answering frequent customer queries automatically.
+Personal Assistants: Providing interactive responses to basic user requests.
+Education: Assisting in learning by answering subject-specific questions.
 
-### Step-By-Step Explanation and Installation Guide
-> https://dentricedev.com/blog/how-to-create-an-ai-chatbot-in-python-and-flask-gvub
-> 
-> https://dev.to/dennismaina/how-to-create-an-ai-chatbot-in-python-and-flask-1c3m
-### Execution
-To run this Bot, first run the ```train.py``` file to train the model. This will generate a file named ```chatbot_model.h5```<br>
-This is the model which will be used by the Flask REST API to easily give feedback without the need to retrain.<br>
-After running ```train.py```, next run the ```app.py``` to initialize and start the bot.<br>
-To add more terms and vocabulary to the bot, modify the ```intents.json``` file and add your personalized words and retrain the model again.
+## Future Improvements:
+Add context-awareness, multilingual support, and more advanced models.
 
-
-<!-- Actual text -->
-## Find me on
-[![Twitter][1.2]][1]  [![LinkedIn][2.2]][2]
-
-<!-- Icons -->
-
-[1.2]: http://i.imgur.com/wWzX9uB.png (Twitter)
-[2.2]: https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/linkedin-3-16.png (LinkedIn)
-
-<!-- Links to my social media accounts -->
-[1]: https://twitter.com/dennisjmaina
-[2]: https://www.linkedin.com/in/dennismaina/
-[3]: https://instagram.com/denno.h_
-
-## Having troubles implementing?
- > Reach out to me maina@dentricedev.com 
- I will be happy to assist 
-# 
-## want something improved or added?
-  > Fork the repo @ [GitHub](https://github.com/mainadennis/An-AI-Chatbot-in-Python-and-Flask).
-# 
-## Regards,
- > [DentriceDev Solutions](https://dentricedev.com).
